@@ -1,63 +1,63 @@
 @extends('admin.hotel.search')
 
 @section('search_results')
-    <div class="page-wrapper search-page-wrapper">
-        <div class="search-result">
-            <h3 class="search-result-title">検索結果</h3>
-            @if (!empty($hotelList))
-                <table class="shopsearchlist_table">
-                    <tbody>
-                        <tr>
-                            <td nowrap="" id="hotel_name">
-                                ホテル名
-                            </td>
-                            <td nowrap="" id="pref">
-                                都道府県
-                            </td>
-                            <td nowrap="" id="created_at">
-                                登録日
-                            </td>
-                            <td nowrap="" id="updated_at">
-                                更新日
-                            </td>
-                            <td class="btn_center" id="edit"></td>
-                            <td class="btn_center" id="delete"></td>
-                        </tr>
-                        @foreach($hotelList as $hotel)
-                            <tr style="background-color:#BDF1FF">
-                                <td>
-                                    <a href="" target="_blank">{{ $hotel['hotel_name'] }}</a>
-                                </td>
-                                <td>
-                                    {{ $hotel['prefecture']['prefecture_name'] }}
-                                </td>
-                                <td>
-                                    {{ (string) $hotel['created_at'] }}
-                                </td>
-                                <td>
-                                    {{ (string) $hotel['updated_at'] }}
-                                </td>
-                                <td>
-                                    <form action="{{ route('adminHotelEditPage') }}" method="get">
-                                        @csrf
-                                        <input type="hidden" name="hotel_id" value="{{ $hotel['hotel_id'] }}">
-                                        <button type="submit">編集</button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="{{ route('adminHotelDeleteProcess') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="hotel_id" value="{{ $hotel['hotel_id'] }}">
-                                        <button type="submit">削除</button>
-                                    </form>
-                                </td>
+    @if ($hotels->count() > 0)
+        <div class="search-page-wrapper-results">
+            <div class="search-result">
+
+                <div class="search-results">
+                    <h3 class="subtitle">検索結果</h3>
+                    <table class="hotel-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>ホテル名</th>
+                                <th>地域</th>
+                                <th>画像</th>
+                                <th>アクション</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @else
-                <p>検索結果がありません</p>
-            @endif
+                        </thead>
+                        <tbody>
+                            @foreach ($hotels as $hotel)
+                                <tr>
+                                    <td>{{ $hotel->hotel_id }}</td>
+                                    <td>{{ $hotel->hotel_name }}</td>
+                                    <td>{{ $hotel->prefecture->prefecture_name ?? 'N/A' }}</td>
+                                    <td>
+                                        @if ($hotel->file_path)
+                                            <img src="{{ asset('assets/img/' . $hotel->file_path) }}"
+                                                alt="{{ $hotel->hotel_name }}" class="hotel-thumbnail"
+                                                style="max-width: 100px;">
+                                        @else
+                                            <span>画像なし</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('adminHotelEditPage', ['hotel_id' => $hotel->hotel_id]) }}"
+                                            class="btn-edit">編集</a>
+                                        <form
+                                            action="{{ route('adminHotelDeleteProcess', ['hotel_id' => $hotel->hotel_id]) }}"
+                                            method="post" style="display:inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-delete"
+                                                onclick="return confirm('本当に削除しますか？')">削除</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-wrapper">
+                    {{ $hotels->links() }}
+                </div>
+
+            </div>
         </div>
-    </div>
+    @elseif(!empty($hotelName) && $hotels->count() === 0)
+        <p class="no-results">検索結果が見つかりませんでした。</p>
+    @endif
 @endsection

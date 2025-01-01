@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Class Hotel
+ * @package App\Models
+ */
 class Hotel extends Model
 {
     /**
@@ -16,6 +20,16 @@ class Hotel extends Model
      * @var array
      */
     protected $guarded = ['hotel_id'];
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'hotel_name',
+        'prefecture_id',
+        'file_path',
+        'file_path',
+    ];
 
     /**
      * @return BelongsTo

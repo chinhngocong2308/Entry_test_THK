@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import { glob } from "glob";
+import path from 'path';
 
 export default defineConfig({
     plugins: [
@@ -7,8 +9,10 @@ export default defineConfig({
             input: [
                 // 'resources/css/app.css',
                 // 'resources/js/app.js',
-                'resources/scss/**/*.scss',
-                'resources/css/**/*.css',
+                // 'resources/scss/**/*.scss',
+                // 'resources/css/**/*.css',
+                ...glob.sync(path.resolve(__dirname, 'resources/scss/**/*.scss')), // Resolve absolute paths
+                ...glob.sync(path.resolve(__dirname, 'resources/css/**/*.css')), // Resolve absolute paths
             ],
             refresh: true,
         }),

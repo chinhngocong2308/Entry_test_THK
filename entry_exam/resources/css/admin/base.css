@@ -21,7 +21,7 @@ h2.title {
 
 h2.title,
 .search-hotel-name {
-    padding-left: 320px;
+    padding-left: 0;
 }
 
 table {

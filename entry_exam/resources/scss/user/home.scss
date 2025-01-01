@@ -19,7 +19,7 @@
             }
         }
         &:hover{
-            color: lighten($color: #000000, $amount: 50%)
+            color: scale(#000000, 50%);
         }
     }
     .area_wrapper{
