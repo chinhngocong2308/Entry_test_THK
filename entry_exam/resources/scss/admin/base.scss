@@ -1,0 +1,30 @@
+body {
+    @media (max-width: 480px) {}
+
+    @media (max-width: 768px) {
+        .container {
+            flex-wrap: wrap;
+            .admin-menu {
+                .menu-block {
+                    height: auto;
+                }
+                width: 100%;
+                box-shadow: unset;
+                ul {
+                    flex-direction: row;
+                    margin-top: 8px;
+                }
+            }
+            .page-wrapper {
+                width: 100%;
+            }
+        }
+
+    }
+
+    @media (max-width: 1024px) {}
+
+    @media (max-width: 1280px) {}
+
+    @media (min-width: 1440px) {}
+}

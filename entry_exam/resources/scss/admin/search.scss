@@ -5,7 +5,9 @@
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
-
+.search-page-wrapper {
+  padding: 20px;
+}
 .title {
   font-size: 24px;
   font-weight: bold;
@@ -28,10 +30,23 @@
   transition: opacity 0.5s ease-out;
 }
 
-.search-hotel-name {
+.search-hotel-name,.search-booking {
+  padding-left: 0;
+  padding: 10px 0;
+  &h2.title{
+    padding: 10px 0;
+    padding-left: 0;
+  }
+  .select2 {
+    margin-top: 8px;
+    margin-right: 8px;
+  }
   .select2-container {
     .select2-selection--single {
-      height: 36px;
+      height: 43px;
+      .select2-selection__arrow {
+        top: 8px;
+      }
     }
     &--default {
       .select2-selection--single {
@@ -39,21 +54,23 @@
           color: #999;
           font-size: 23px;
           line-height: 20px;
-          height: 34px;
+          height: 43px;
+          margin: 0 24px 0 0;
         }
         .select2-selection__rendered {
-          line-height: 36px;
+          line-height: 43px;
         }
       }
     }
   }
 
-  input[type="text"] {
+  input {
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 10px;
+    margin-top: 8px;
   }
 
   form {
@@ -74,8 +91,8 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin: 0 8px;
-
+    margin-top: 8px;
+    margin-right: 8px;
     &:hover {
       background-color: #218838;
     }
@@ -89,7 +106,7 @@
     margin-bottom: 10px;
   }
 
-  .hotel-table {
+  .hotel-table,.booking-table {
     width: 100%;
     border-collapse: collapse;
 

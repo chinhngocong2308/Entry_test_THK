@@ -20,6 +20,7 @@
         });
     </script>
     @vite('resources/css/admin/base.css')
+    @vite('resources/scss/admin/base.scss')
     @vite('resources/scss/admin/side-menu.scss')
     @yield('custom_css')
 </head>

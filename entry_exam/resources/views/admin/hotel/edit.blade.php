@@ -3,7 +3,7 @@
 
 <!-- CSS per page -->
 @section('custom_css')
-    @vite('resources/scss/admin/hotel/create.scss')
+    @vite('resources/scss/admin/hotel/form.scss')
 @endsection
 
 <!-- main contents -->

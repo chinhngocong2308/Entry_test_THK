@@ -30,8 +30,8 @@
                         </option>
                     @endforeach
                 </select>
-
                 <button id="submit-search" type="submit">検索</button>
+                <button id="reset-search" type="button">リセット</button>
             </form>
 
             <!-- Error Message -->
@@ -185,6 +185,28 @@
                 });
             }
 
+            $(document).on('click', '.page-link', function(event) {
+                event.preventDefault();
+
+                const pageUrl = $(this).attr('href');
+                const url = new URL(pageUrl);
+                const page = url.searchParams.get('page');
+
+                const queryParams = new URLSearchParams(window.location.search);
+
+                if (page) {
+                    queryParams.set('page', page);
+                }
+
+                window.location.href = `${window.location.pathname}?${queryParams.toString()}`;
+            });
+
+            $('#reset-search').on('click', function() {
+                searchValueInput.val('');
+                prefectureSelect.val('');
+
+                window.location.href = window.location.pathname;
+            });
         });
     </script>
 @endsection
